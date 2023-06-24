@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  mysql-zngtech:
+    container_name: mysql-zngtech
+    image: mysql
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=hicoders_12
+      - MYSQL_PASSWORD=hicoders_12
+      - MYSQL_USER=hicoders
+      - MYSQL_DATABASE=zngtech
+    volumes:
+      - ./mysqlDB:/var/lib/meinsql/data
+  phpmyadmin-zngtech:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma-zngtech
+    depends_on:
+        - mysql-zngtech
+    environment:
+        PMA_HOST: mysql-zngtech
+    restart: always
+    ports:
+        - 8080:80
